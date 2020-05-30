@@ -2,15 +2,14 @@ const tictactoe = (function(){
 
     const infoelement = document.getElementById('info');
 
-    const cellElements = document.getElementsByClassName('box');
+    const boxelements = document.getElementsByClassName('box');
 
-    const cells = [];
+    const boxs = [];
 
 
 
-    let turn = 'O'; // who is playing
-
-    let playing = true; // is game active
+    let turn = 'O'; 
+    let playing = true; 
 
 
 
@@ -18,17 +17,17 @@ const tictactoe = (function(){
 
 
 
-    for (let index = 0; index < cellElements.length; index++) {
+    for (let index = 0; index < boxelements.length; index++) {
 
-        cellElements[index].addEventListener('click', evt => cellClick(evt, index));
+        boxelements[index].addEventListener('click', evt => boxClick(evt, index));
 
     
 
-        cells[index] = {
+        boxs[index] = {
 
-            element: cellElements[index],
+            element: boxelements[index],
 
-            value: null, // is this cell X or O
+            value: null, // is this box X or O
 
             reset: function() {
 
@@ -44,13 +43,13 @@ const tictactoe = (function(){
 
 
 
-    function cellClick(evt, index) {
+    function boxClick(evt, index) {
 
-        if(playing && cells[index].value === null) {
+        if(playing && boxs[index].value === null) {
 
-            cells[index].value = turn;
+            boxs[index].value = turn;
 
-            cells[index].element.classList.add(turn);
+            boxs[index].element.classList.add(turn);
 
 
 
@@ -84,23 +83,21 @@ const tictactoe = (function(){
 
 
 
-        // first row
+        if(boxs[0].value !== null && boxs[0].value === boxs[1].value && boxs[0].value === boxs[2].value) winner = boxs[0].value;
 
-        if(cells[0].value !== null && cells[0].value === cells[1].value && cells[0].value === cells[2].value) winner = cells[0].value;
+        else if(boxs[3].value !== null && boxs[3].value === boxs[4].value && boxs[3].value === boxs[5].value) winner = boxs[3].value; 
 
-        else if(cells[3].value !== null && cells[3].value === cells[4].value && cells[3].value === cells[5].value) winner = cells[3].value; // 2. row
+        else if(boxs[6].value !== null && boxs[6].value === boxs[7].value && boxs[6].value === boxs[8].value) winner = boxs[6].value; 
 
-        else if(cells[6].value !== null && cells[6].value === cells[7].value && cells[6].value === cells[8].value) winner = cells[6].value; // 3. row
+        else if(boxs[0].value !== null && boxs[0].value === boxs[3].value && boxs[0].value === boxs[6].value) winner = boxs[0].value;
 
-        else if(cells[0].value !== null && cells[0].value === cells[3].value && cells[0].value === cells[6].value) winner = cells[0].value; // 1. col
+        else if(boxs[1].value !== null && boxs[1].value === boxs[4].value && boxs[1].value === boxs[7].value) winner = boxs[1].value; 
 
-        else if(cells[1].value !== null && cells[1].value === cells[4].value && cells[1].value === cells[7].value) winner = cells[1].value; // 2. col
+        else if(boxs[2].value !== null && boxs[2].value === boxs[5].value && boxs[2].value === boxs[8].value) winner = boxs[2].value; 
 
-        else if(cells[2].value !== null && cells[2].value === cells[5].value && cells[2].value === cells[8].value) winner = cells[2].value; // 3. col
+        else if(boxs[0].value !== null && boxs[0].value === boxs[4].value && boxs[0].value === boxs[8].value) winner = boxs[0].value; 
 
-        else if(cells[0].value !== null && cells[0].value === cells[4].value && cells[0].value === cells[8].value) winner = cells[0].value; // dia ltr
-
-        else if(cells[2].value !== null && cells[2].value === cells[4].value && cells[2].value === cells[6].value) winner = cells[2].value; // dia rtl
+        else if(boxs[2].value !== null && boxs[2].value === boxs[4].value && boxs[2].value === boxs[6].value) winner = boxs[2].value; 
 
         
 
@@ -114,11 +111,11 @@ const tictactoe = (function(){
 
         } else if ( // check draw
 
-            cells[0].value !== null && cells[1].value !== null && cells[2].value !== null && 
+            boxs[0].value !== null && boxs[1].value !== null && boxs[2].value !== null && 
 
-            cells[3].value !== null && cells[4].value !== null && cells[5].value !== null && 
+            boxs[3].value !== null && boxs[4].value !== null && boxs[5].value !== null && 
 
-            cells[6].value !== null && cells[7].value !== null && cells[8].value !== null
+            boxs[6].value !== null && boxs[7].value !== null && boxs[8].value !== null
 
         ) {
 
@@ -144,9 +141,9 @@ const tictactoe = (function(){
 
 
 
-            for (let index = 0; index < cells.length; index++) {
+            for (let index = 0; index < boxs.length; index++) {
 
-                cells[index].reset();
+                boxs[index].reset();
 
             }
 
